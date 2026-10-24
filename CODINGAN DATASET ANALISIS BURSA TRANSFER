@@ -1,1 +1,324 @@
+# DATASET-ANALISIS-BURSA-TRANSFER-Seberapa-Besar-Perputaran-Uang-Liga-Portugal-
+Codingan Dataset
 
+1. Gambaran Besar Bursa Liga Portugal
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+# Data transfer klub Liga Portugal
+klub = [
+    "Sporting CP", "Benfica", "SC Braga",
+    "FC Famalicão", "FC Porto", "Vitória Guimarães",
+    "Estoril Praia", "Gil Vicente FC", "Santa Clara"
+]
+
+pendapatan = [
+    200.85, 128.40, 66.10, 42.75, 44.00,
+    22.13, 11.30, 9.00, 7.89
+]
+
+pengeluaran = [
+    123.28, 91.35, 36.20, 6.50, 32.50,
+    1.08, 2.30, 1.10, 0.02
+]
+
+saldo = [
+    77.57, 37.05, 29.90, 36.25, 11.50,
+    21.05, 9.00, 7.90, 7.87
+]
+
+# Tampilkan tabel
+df = pd.DataFrame({
+    "Klub": klub,
+    "Pendapatan (€m)": pendapatan,
+    "Pengeluaran (€m)": pengeluaran,
+    "Saldo (€m)": saldo
+})
+
+display(df)
+
+# Buat grafik
+x = np.arange(len(klub))
+lebar = 0.35
+
+plt.figure(figsize=(14, 7))
+
+plt.bar(
+    x - lebar / 2,
+    pendapatan,
+    lebar,
+    label="Pendapatan transfer"
+)
+
+plt.bar(
+    x + lebar / 2,
+    pengeluaran,
+    lebar,
+    label="Pengeluaran transfer"
+)
+
+plt.title("Pendapatan vs Pengeluaran Transfer Liga Portugal 2026/27")
+plt.ylabel("€ Juta")
+plt.xticks(x, klub, rotation=35, ha="right")
+plt.legend()
+plt.grid(axis="y", alpha=0.25)
+plt.tight_layout()
+plt.show()
+
+2. Sporting CP: Mesin Penjualan Terbesar
+import pandas as pd
+from IPython.display import display
+
+data = {
+    "Klub": [
+        "Sporting CP",
+        "Benfica",
+        "SC Braga",
+        "FC Famalicão"
+    ],
+    "Pendapatan (€m)": [
+        200.85, 128.40, 66.10, 42.75
+    ],
+    "Pengeluaran (€m)": [
+        123.28, 91.35, 36.20, 6.50
+    ],
+    "Saldo (€m)": [
+        77.57, 37.05, 29.90, 36.25
+    ]
+}
+
+df = pd.DataFrame(data)
+
+display(
+    df.style
+    .format({
+        "Pendapatan (€m)": "{:.2f}",
+        "Pengeluaran (€m)": "{:.2f}",
+        "Saldo (€m)": "{:+.2f}"
+    })
+    .hide(axis="index")
+    .set_caption(
+        "Pendapatan dan Pengeluaran Transfer Liga Portugal 2026/27"
+    )
+    .set_properties(**{
+        "background-color": "#303030",
+        "color": "white",
+        "text-align": "center",
+        "border": "1px solid #888888"
+    })
+    .set_table_styles([
+        {
+            "selector": "th",
+            "props": [
+                ("background-color", "#404040"),
+                ("color", "white"),
+                ("text-align", "center"),
+                ("border", "1px solid #888888")
+            ]
+        },
+        {
+            "selector": "caption",
+            "props": [
+                ("caption-side", "top"),
+                ("color", "white"),
+                ("font-size", "16px"),
+                ("font-weight", "bold"),
+                ("padding", "10px")
+            ]
+        }
+    ])
+)
+
+3. Delapan Transfer Terbesar
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# 1. DATA TRANSFER PEMAIN
+data = {
+    "Pemain": [
+        "Geovany Quenda",
+        "Ousmane Diomande",
+        "Morten Hjulmand",
+        "Francisco Trincão",
+        "Amar Dedić",
+        "Rodrigo Zalazar",
+        "Rodrigo Mora",
+        "António Silva"
+    ],
+
+    "Dari": [
+        "Sporting CP",
+        "Sporting CP",
+        "Sporting CP",
+        "Sporting CP",
+        "Benfica",
+        "SC Braga",
+        "FC Porto",
+        "Benfica"
+    ],
+
+    "Ke": [
+        "Chelsea",
+        "Nottingham Forest",
+        "Atlético Madrid",
+        "Al Ahli",
+        "Newcastle",
+        "Sporting CP",
+        "AS Roma",
+        "Bournemouth"
+    ],
+
+    "Fee (€m)": [
+        50.78, 40.00, 40.00, 39.35,
+        35.90, 30.00, 25.00, 25.00
+    ],
+
+    "Market value (€m)": [
+        42.00, 42.00, 45.00, 40.00,
+        16.00, 30.00, 38.00, 25.00
+    ]
+}
+
+# 2. MEMBUAT TABEL DATA
+df = pd.DataFrame(data)
+
+print("TABEL 8 TRANSFER TERBESAR LIGA PORTUGAL 2026")
+display(df)
+
+# 3. MENGURUTKAN DATA UNTUK GRAFIK
+df_grafik = df.sort_values(
+    by="Fee (€m)",
+    ascending=True
+)
+
+# 4. MEMBUAT GRAFIK BATANG HORIZONTAL
+plt.figure(figsize=(12, 7))
+
+plt.barh(
+    df_grafik["Pemain"],
+    df_grafik["Fee (€m)"],
+    color="steelblue"
+)
+
+# 5. MEMBERIKAN JUDUL DAN LABEL
+plt.title(
+    "8 Transfer Terbesar dari Klub Liga Portugal - Musim Panas 2026",
+    fontsize=13
+)
+
+plt.xlabel("Nilai transfer (€ juta)", fontsize=11)
+plt.ylabel("")
+
+# 6. MENGATUR TAMPILAN GRAFIK
+plt.grid(axis="x", alpha=0.25)
+plt.tight_layout()
+
+# 7. MENAMPILKAN GRAFIK
+plt.show()
+
+4. Harga Transfer Tidak Selalu Sama dengan Market Value
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 1. DATA PEMAIN
+data = {
+    "Pemain": [
+        "Geovany Quenda",
+        "Ousmane Diomande",
+        "Morten Hjulmand",
+        "Francisco Trincão",
+        "Amar Dedić",
+        "Rodrigo Zalazar",
+        "Rodrigo Mora",
+        "António Silva"
+    ],
+
+    "Fee (€m)": [
+        50.78, 40.00, 40.00, 39.35,
+        35.90, 30.00, 25.00, 25.00
+    ],
+
+    "Market value (€m)": [
+        42.00, 42.00, 45.00, 40.00,
+        16.00, 30.00, 38.00, 25.00
+    ]
+}
+
+# 2. MEMBUAT TABEL DAN MENGHITUNG SELISIH
+df = pd.DataFrame(data)
+
+df["Selisih (€m)"] = (
+    df["Fee (€m)"] - df["Market value (€m)"]
+)
+
+# Menghitung persentase premium/discount
+df["Premium/Discount"] = (
+    df["Selisih (€m)"] / df["Market value (€m)"] * 100
+)
+
+# 3. MENAMPILKAN TABEL
+tabel = df.copy()
+
+tabel["Selisih (€m)"] = tabel["Selisih (€m)"].map(
+    lambda x: f"{x:+.2f}"
+)
+
+tabel["Premium/Discount"] = tabel["Premium/Discount"].map(
+    lambda x: f"{x:+.1f}%"
+)
+
+print("TABEL PERBANDINGAN FEE TRANSFER DAN MARKET VALUE")
+display(tabel)
+
+# 4. MENYIAPKAN DATA GRAFIK
+pemain = df["Pemain"]
+fee = df["Fee (€m)"]
+market_value = df["Market value (€m)"]
+
+x = np.arange(len(pemain))
+lebar = 0.36
+
+# 5. MEMBUAT GRAFIK BATANG
+fig, ax = plt.subplots(figsize=(12, 7))
+
+bar1 = ax.bar(
+    x - lebar / 2,
+    fee,
+    lebar,
+    label="Harga transfer"
+)
+
+bar2 = ax.bar(
+    x + lebar / 2,
+    market_value,
+    lebar,
+    label="Market value"
+)
+
+# 6. JUDUL DAN LABEL GRAFIK
+ax.set_title(
+    "Harga Transfer vs Market Value Sebelum Transfer",
+    fontsize=14
+)
+
+ax.set_ylabel("€ Juta")
+ax.set_xticks(x)
+ax.set_xticklabels(
+    pemain,
+    rotation=35,
+    ha="right"
+)
+
+ax.legend()
+ax.grid(axis="y", alpha=0.25)
+ax.set_axisbelow(True)
+
+# Menampilkan nilai di atas batang
+ax.bar_label(bar1, fmt="%.2f", padding=2, fontsize=8)
+ax.bar_label(bar2, fmt="%.2f", padding=2, fontsize=8)
+
+# 7. MERAPIKAN DAN MENAMPILKAN GRAFIK
+plt.tight_layout()
+plt.show()
